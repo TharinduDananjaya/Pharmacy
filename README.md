@@ -1,5 +1,5 @@
 <h2 class="emoji">📄 Medical Prescription Management System</h2>
-<p>The <strong>Medical Prescription Management System</strong> is a web-based application built using PHP that facilitates easy communication between users and pharmacies. Users can upload their medical prescriptions, while pharmacy admins can view these uploads, prepare quotations for medicines, and notify users about the available options.</p>
+<p>The <strong>Medical Prescription Management System</strong> is a web-based application built using Laravel and React that facilitates easy communication between users and pharmacies. Users can upload their medical prescriptions, while pharmacy admins can view these uploads, prepare quotations for medicines, and notify users about the available options.</p>
 
 <h2 class="emoji">✨ Features</h2>
 
