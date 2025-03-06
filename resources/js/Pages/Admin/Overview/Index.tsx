@@ -1,8 +1,11 @@
-
+import Model from '@/Components/Model';
 import React, { useState } from 'react';
+
 
 export default function Index({ prescriptions }: any) {
   const [statuses, setStatuses] = useState<any[]>(prescriptions);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPrescription, setSelectedPrescription] = useState<any>(null);
 
   // Handle status change
   const handleStatusChange = (id: number, newStatus: string) => {
@@ -10,9 +13,18 @@ export default function Index({ prescriptions }: any) {
     setStatuses(statuses.map(prescription => 
       prescription.id === id ? { ...prescription, status: newStatus } : prescription
     ));
+  };
 
-    // Optionally, make an API call to update the status in the database
-    // fetch(`/update-status/${id}`, { method: 'POST', body: { status: newStatus } });
+  // Handle modal open
+  const handleOpenModal = (prescription: any) => {
+    setSelectedPrescription(prescription);
+    setIsModalOpen(true);
+  };
+
+  // Handle modal close
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedPrescription(null);
   };
 
   return (
@@ -43,7 +55,10 @@ export default function Index({ prescriptions }: any) {
                 </select>
               </td>
               <td className="border border-gray-300 p-4">
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                  onClick={() => handleOpenModal(prescription)}
+                >
                   View Prescription
                 </button>
                 <button className="ml-2 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
@@ -54,6 +69,13 @@ export default function Index({ prescriptions }: any) {
           ))}
         </tbody>
       </table>
+
+      {/* Modal to display prescription details */}
+      <Model
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        prescription={selectedPrescription}
+      />
     </div>
   );
 }
