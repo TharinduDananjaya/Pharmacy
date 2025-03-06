@@ -15,17 +15,35 @@ class Prescription extends Model
     protected $fillable = [
         'user_id',
         'image',
+        'images',
         'note',
         'delivery_address',
         'delivery_time',
         'status',
     ];
 
+    protected $casts = [
+        'images' => 'array', // Ensure Laravel treats images as an array
+    ];
+
     protected $appends = ['image_url'];
 
-    public function getImageUrlAttribute() {
-        return $this->image ? Storage::url($this->image) : null;
-    }
+    // public function getImageUrlAttribute() {
+    //     return $this->image ? Storage::url($this->image) : null;
+    // }
+//     public function getImageUrlAttribute($value)
+// {
+//     $images = json_decode($value, true) ?? [];
+//     return array_map(fn($image) => asset('storage/' . $image), $images);
+// }
+
+
+public function getImageUrlAttribute()
+{
+    $images = $this->images ?? [];
+    return array_map(fn($image) => asset('storage/' . $image), $images);
+}
+
 
     
     /**
