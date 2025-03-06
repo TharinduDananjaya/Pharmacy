@@ -2,8 +2,10 @@ import React from "react";
 import { useForm, usePage } from "@inertiajs/react";
 import Dropzone from "react-dropzone";
 import InputLabel from "@/Components/InputLabel";
+import PublicLayout from "@/Layouts/PublicLayout";
 
 const CreatePrescription = () => {
+    const { auth } = usePage().props;
     const { data, setData, post, errors } = useForm({
         images: [] as File[],
         note: "",
@@ -12,15 +14,26 @@ const CreatePrescription = () => {
     });
 
 
-
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
+    const handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        post(route("client.prescriptions.store"), {
+    
+        const formData = new FormData();
+        data.images.forEach((image) => {
+            formData.append('images[]', image);
+        });
+        formData.append('note', data.note);
+        formData.append('delivery_address', data.delivery_address);
+        formData.append('delivery_time', data.delivery_time);
+    
+        post(route('client.prescriptions.store'), {
             preserveScroll: true,
         });
     };
+    
+
 
     return (
+        <PublicLayout auth={auth}>
         <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 py-12">
             <div className="bg-white shadow-md sm:rounded-lg p-6">
                 <form onSubmit={handleSubmit}>
@@ -126,6 +139,7 @@ const CreatePrescription = () => {
                 </form>
             </div>
         </div>
+        </PublicLayout>
     );
 };
 
