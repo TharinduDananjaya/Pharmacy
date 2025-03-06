@@ -1,10 +1,12 @@
 import React from "react";
 import { usePage } from "@inertiajs/react";
+import PublicLayout from "@/Layouts/PublicLayout";
 
 const PrescriptionList = () => {
-    const { prescriptions }: any = usePage().props;  // Get prescriptions from the page props
+    const { prescriptions, auth }: any = usePage().props;  // Get prescriptions and auth from the page props
 
     return (
+        <PublicLayout auth={auth}>
         <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 py-12">
             <div className="bg-white shadow-md sm:rounded-lg p-6">
                 <h1 className="text-xl font-bold text-gray-900 text-center">
@@ -43,6 +45,7 @@ const PrescriptionList = () => {
                 </table>
             </div>
         </div>
+        </PublicLayout>
     );
 };
 
