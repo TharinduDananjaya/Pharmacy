@@ -27,8 +27,8 @@
 
 <h2 class="emoji">🛠️ Technologies Used</h2>
 <ul>
-    <li><strong>Backend:</strong> PHP</li>
-    <li><strong>Frontend:</strong> HTML, CSS</li>
+    
+    <li><strong>Technologies:</strong> Laravel, React, Inertia, TypeScript</li>
     <li><strong>Database:</strong> MySQL</li>
 </ul>
 
