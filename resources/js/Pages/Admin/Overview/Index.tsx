@@ -1,4 +1,7 @@
 import Model from '@/Components/Model';
+import AdminSideBar from '@/Components/shared/AdminSidebar/AdminSideBar';
+import Sidebar from '@/Components/shared/AdminSidebar/AdminSideBar';
+import { router, useForm, usePage } from '@inertiajs/react';
 import React, { useState } from 'react';
 
 
@@ -7,13 +10,12 @@ export default function Index({ prescriptions }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPrescription, setSelectedPrescription] = useState<any>(null);
 
-  // Handle status change
+  const { post } = useForm();
+
   const handleStatusChange = (id: number, newStatus: string) => {
-    // Update status locally
-    setStatuses(statuses.map(prescription => 
-      prescription.id === id ? { ...prescription, status: newStatus } : prescription
-    ));
-  };
+    router.post(route('update.status', { id }), { status: newStatus });
+};
+
 
   // Handle modal open
   const handleOpenModal = (prescription: any) => {
@@ -26,9 +28,12 @@ export default function Index({ prescriptions }: any) {
     setIsModalOpen(false);
     setSelectedPrescription(null);
   };
-
+  const pageProps = usePage().props;
+  const { user }: any = pageProps.auth;
   return (
+   
     <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 py-12">
+      {/* <AdminSideBar user={user} /> */}
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Admin Overview</h1>
       <table className="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
