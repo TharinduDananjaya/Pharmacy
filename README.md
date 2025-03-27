@@ -25,12 +25,9 @@
     </ul>
 </div>
 
-<h2 class="emoji">🛠️ Technologies Used</h2>
-<ul>
-    
-    <li><strong>Technologies:</strong> Laravel, React, Inertia, TypeScript</li>
-    <li><strong>Database:</strong> MySQL</li>
-</ul>
+### 🛠️ Technologies Used
+- **Technologies:** Laravel, React, Inertia, TypeScript
+- **Database:** MySQL
 
 
 
