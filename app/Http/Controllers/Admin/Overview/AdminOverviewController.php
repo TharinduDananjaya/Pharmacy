@@ -32,9 +32,11 @@ class AdminOverviewController extends Controller
         $prescription->status = $validated['status'];
         $prescription->save();
 
-        return response()->json([
-            'message' => 'Prescription status updated successfully.',
-            'status' => $prescription->status,
-        ]);
+        // return response()->json([
+        //     'message' => 'Prescription status updated successfully.',
+        //     'status' => $prescription->status,
+        // ]);
+        return redirect()->back()->with('success', 'Prescription status updated successfully.');
+       
     }
 }
